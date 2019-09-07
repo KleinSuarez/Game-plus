@@ -8,6 +8,7 @@ public class Cliente {
     private String telefono;
     private String dirección;
     private TipoDocumentoIdentidad tipoDocumentoIdentidad;
+    private String numeroDocumento;
     private boolean activebool;
 
     public Cliente (){}
