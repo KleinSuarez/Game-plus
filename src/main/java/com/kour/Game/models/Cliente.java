@@ -12,6 +12,10 @@ public class Cliente {
     private boolean activebool;
 
     public Cliente (){}
+    public Cliente (String nombre, String apellido){
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
 
     public Long getId() {
         return id;

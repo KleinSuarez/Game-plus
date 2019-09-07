@@ -12,6 +12,9 @@ public class VideoJuego {
     private  TipoConsola tipoConsola;
 
     public VideoJuego (){}
+    public VideoJuego (String titulo){
+        this.titulo = titulo;
+    }
 
     public Long getId() {
         return id;
