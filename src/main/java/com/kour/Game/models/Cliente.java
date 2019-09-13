@@ -9,13 +9,15 @@ public class Cliente {
     private String dirección;
     private TipoDocumentoIdentidad tipoDocumentoIdentidad;
     private String numeroDocumento;
-    private boolean activebool;
+    private boolean activo;
 
     public Cliente (){}
     public Cliente (String nombre, String apellido){
         this.nombre = nombre;
         this.apellido = apellido;
     }
+
+
 
     public Long getId() {
         return id;
@@ -69,11 +71,11 @@ public class Cliente {
         this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
     }
 
-    public boolean isActivebool() {
-        return activebool;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setActivebool(boolean activebool) {
-        this.activebool = activebool;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 }
