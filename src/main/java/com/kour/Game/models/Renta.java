@@ -29,12 +29,12 @@ public class Renta {
         return  (int) ((fechaActual.getTime()-this.fechaRenta.getTime())/86400000);
     }
 
-    public Cliente calcularTiempoRenta () throws ExcedidoTiempoMaximoRentaException, ParseException {
-
+    public boolean calcularSiExcedioTiempo () throws ExcedidoTiempoMaximoRentaException, ParseException {
         if (this.calculateDiasUso() > ParametroSistema.DIAS_MAXIMO_DE_RENTA){
             throw new ExcedidoTiempoMaximoRentaException(Mensaje.Renta.DIAS_EXCEDIDOS);
+        }else{
+            return false;
         }
-        return this.cliente;
     }
 
     // Getter and Setter
