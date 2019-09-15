@@ -23,31 +23,24 @@ public class Renta {
         this.cliente = cliente;
     }
 
-    public void diasUso () throws ExcedidoTiempoMaximoRentaException, ParseException {
-        java.util.Date fechaActual = new Date();
-        int diasUso =(int) ((fechaActual.getTime()-this.fechaRenta.getTime())/86400000);
 
-        if (diasUso > ParametroSistema.DIAS_MAXIMO_DE_RENTA){
+    public int calculateDiasUso(){
+        java.util.Date fechaActual = new Date();
+        return  (int) ((fechaActual.getTime()-this.fechaRenta.getTime())/86400000);
+    }
+
+    public void diasUso () throws ExcedidoTiempoMaximoRentaException, ParseException {
+
+        if (this.calculateDiasUso() > ParametroSistema.DIAS_MAXIMO_DE_RENTA){
             throw new ExcedidoTiempoMaximoRentaException(Mensaje.Renta.DIAS_EXCEDIDOS);
         }
 
     }
 
+    public Renta clienteSinDevolverVideoJuego () {
 
 
-    public void setFechaRenta(String fechaRenta) throws ParseException {
-        this.fechaRenta = formatoFecha.parse(fechaRenta);
+        return this;
     }
 
-    public Date getFechaRenta() {
-        return fechaRenta;
-    }
-
-    public boolean isDevuelto() {
-        return devuelto;
-    }
-
-    public void setDevuelto(boolean devuelto) {
-        this.devuelto = devuelto;
-    }
 }
