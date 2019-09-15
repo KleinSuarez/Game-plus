@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -36,13 +37,20 @@ public class RentaTest {
     }
 
     @Test
-    public void excedidoTiempoRenta() throws ExcedidoTiempoMaximoRentaException, ParseException {
-        exception.expect(ExcedidoTiempoMaximoRentaException.class);
-        exception.expectMessage(Mensaje.Renta.DIAS_EXCEDIDOS);
-        rentatest.diasUso();
+    public void calcularDiasUso() throws  ParseException {
+        String fechaActual = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String nuevaFechaRenta = String.valueOf(fechaActual);
+        rentatest.setFechaRenta(nuevaFechaRenta);
 
+        int diasEsperados = 0;
+        int diasSalida = rentatest.calculateDiasUso();
+
+        Assert.assertEquals(diasEsperados, diasSalida,0.5);
     }
 
+    @Test
+    public void dfghj(){
 
+    }
 
 }

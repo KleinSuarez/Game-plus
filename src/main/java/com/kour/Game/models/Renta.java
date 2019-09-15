@@ -29,18 +29,17 @@ public class Renta {
         return  (int) ((fechaActual.getTime()-this.fechaRenta.getTime())/86400000);
     }
 
-    public void diasUso () throws ExcedidoTiempoMaximoRentaException, ParseException {
+    public Cliente calcularTiempoRenta () throws ExcedidoTiempoMaximoRentaException, ParseException {
 
         if (this.calculateDiasUso() > ParametroSistema.DIAS_MAXIMO_DE_RENTA){
             throw new ExcedidoTiempoMaximoRentaException(Mensaje.Renta.DIAS_EXCEDIDOS);
         }
-
+        return this.cliente;
     }
 
-    public Renta clienteSinDevolverVideoJuego () {
+    // Getter and Setter
 
-
-        return this;
+    public void setFechaRenta(String fechaRenta) throws ParseException {
+        this.fechaRenta = formatoFecha.parse(fechaRenta);
     }
-
 }
