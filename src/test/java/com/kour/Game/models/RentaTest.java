@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -55,6 +56,19 @@ public class RentaTest {
         rentatest.calcularSiExcedioTiempo();
     }
 
+    @Test
+    public void ListarClienteJuegoNoDevuelto() throws ParseException {
+        Cliente clienteExperado = new Cliente("Nombre","Apellido");
+        VideoJuego videoJuego = new VideoJuego("Juego de prueba");
+        Disponibilidad disponibilidad = new Disponibilidad(videoJuego,3);
+        Inventario inventario = new Inventario();
+        inventario.agregarVideoJuego(videoJuego,disponibilidad);
 
+        rentatest = new Renta("2019-08-12", videoJuego, clienteExperado);
+
+        Cliente clienteDevuelto = rentatest.listarClienteProdutoNoDevuelto();
+
+        Assert.assertEquals(clienteExperado, clienteDevuelto);
+    }
 
 }

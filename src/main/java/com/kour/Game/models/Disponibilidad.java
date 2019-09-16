@@ -6,6 +6,8 @@ public class Disponibilidad {
     private VideoJuego videoJuego;
     private int cantidad;
 
+    public Disponibilidad(){}
+
     public Disponibilidad(VideoJuego videoJuego, int cantidad) {
         this.videoJuego = videoJuego;
         this.cantidad = cantidad;
