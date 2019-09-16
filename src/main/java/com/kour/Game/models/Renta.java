@@ -14,7 +14,8 @@ public class Renta {
     private SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
     private List<VideoJuego> videoJuegos;
     private Cliente cliente;
-    private boolean devuelto;
+    private Disponibilidad disponibilidad;
+    private  boolean devuelto;
 
     public Renta(){}
     public Renta(String fechaRenta, List<VideoJuego> videoJuegos, Cliente cliente) throws ParseException {
@@ -32,9 +33,8 @@ public class Renta {
     public boolean calcularSiExcedioTiempo () throws ExcedidoTiempoMaximoRentaException, ParseException {
         if (this.calculateDiasUso() > ParametroSistema.DIAS_MAXIMO_DE_RENTA){
             throw new ExcedidoTiempoMaximoRentaException(Mensaje.Renta.DIAS_EXCEDIDOS);
-        }else{
-            return false;
         }
+        return false;
     }
 
     // Getter and Setter
