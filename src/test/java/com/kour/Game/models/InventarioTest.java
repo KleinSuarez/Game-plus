@@ -2,6 +2,7 @@ package com.kour.Game.models;
 
 import com.kour.Game.models.businessException.ProductoNoDisponibleException;
 import com.kour.Game.models.mensajes.Mensaje;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,6 +37,11 @@ public class InventarioTest {
         inventario.verificarDisponibilidadJuego(videoJuego);
     }
 
+    @Test
+    public void obtenerCantidadPorJuego(){
+        int catidadExperada = 0;
+        Assert.assertEquals(catidadExperada, inventario.obtenerCantidadJuego(videoJuego), 0.5);
+    }
 
 }
 
