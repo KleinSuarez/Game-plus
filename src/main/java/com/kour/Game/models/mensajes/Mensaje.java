@@ -5,4 +5,8 @@ public class Mensaje {
         public static final String DIAS_EXCEDIDOS ="Tiempo de renta maximo superado";
     }
 
+    public class Inventario{
+        public static final String PRODUCTO_NO_DISPONIBLE = "Producto no disponible temporalmente";
+    }
+
 }

@@ -46,7 +46,7 @@ public class RentaTest {
     }
 
     @Test
-    public void seExcedioTiempoRenta() throws ExcedidoTiempoMaximoRentaException, ParseException {
+    public void tiempoRentaExcedido() throws ExcedidoTiempoMaximoRentaException, ParseException {
         exception.expect(ExcedidoTiempoMaximoRentaException.class);
         exception.expectMessage(Mensaje.Renta.DIAS_EXCEDIDOS);
         rentatest.calcularSiExcedioTiempo();
@@ -66,5 +66,5 @@ public class RentaTest {
 
         Assert.assertEquals(clienteExperado, clienteDevuelto);
     }
-
+    
 }

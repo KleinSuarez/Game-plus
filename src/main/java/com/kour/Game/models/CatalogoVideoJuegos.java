@@ -1,5 +1,7 @@
 package com.kour.Game.models;
 
+import com.kour.Game.models.businessException.ProductoNoDisponibleException;
+
 import java.util.List;
 
 public class CatalogoVideoJuegos {
@@ -13,12 +15,16 @@ public class CatalogoVideoJuegos {
         this.cantidad = cantidad;
     }
 
-    public boolean isDisponible(){
+    public boolean isDisponible() {
         if(this.cantidad > 0){
             return  true;
         }else{
             return false;
         }
+    }
+
+    public VideoJuego getVideoJuego() {
+        return videoJuego;
     }
 
     public int getCantidad() {
