@@ -37,4 +37,14 @@ public class Inventario {
         return disponile;
     }
 
+    public int obtenerCantidadJuego(VideoJuego videoJuego){
+        int catidadVideoJuego = 0;
+        for (CatalogoVideoJuegos vj: catalogoVideoJuegos) {
+            if (videoJuego.equals(vj.getVideoJuego())){
+                catidadVideoJuego = vj.getCantidad();
+            }
+        }
+        return catidadVideoJuego;
+    }
+
 }
