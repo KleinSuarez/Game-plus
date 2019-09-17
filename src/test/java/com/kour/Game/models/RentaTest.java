@@ -1,5 +1,4 @@
 package com.kour.Game.models;
-import com.kour.Game.models.ParametroSistema;
 
 import com.kour.Game.models.businessException.ExcedidoTiempoMaximoRentaException;
 import com.kour.Game.models.mensajes.Mensaje;
@@ -15,9 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -60,9 +56,9 @@ public class RentaTest {
     public void ListarClienteJuegoNoDevuelto() throws ParseException {
         Cliente clienteExperado = new Cliente("Nombre","Apellido");
         VideoJuego videoJuego = new VideoJuego("Juego de prueba");
-        Disponibilidad disponibilidad = new Disponibilidad(videoJuego,3);
+        CatalogoVideoJuegos catalogoVideoJuegos = new CatalogoVideoJuegos(videoJuego,3);
         Inventario inventario = new Inventario();
-        inventario.agregarVideoJuego(videoJuego,disponibilidad);
+        inventario.agregarVideoJuego(videoJuego, catalogoVideoJuegos);
 
         rentatest = new Renta("2019-08-12", videoJuego, clienteExperado);
 

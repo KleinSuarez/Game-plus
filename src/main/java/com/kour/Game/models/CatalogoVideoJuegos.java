@@ -2,13 +2,13 @@ package com.kour.Game.models;
 
 import java.util.List;
 
-public class Disponibilidad {
+public class CatalogoVideoJuegos {
     private VideoJuego videoJuego;
     private int cantidad;
 
-    public Disponibilidad(){}
+    public CatalogoVideoJuegos(){}
 
-    public Disponibilidad(VideoJuego videoJuego, int cantidad) {
+    public CatalogoVideoJuegos(VideoJuego videoJuego, int cantidad) {
         this.videoJuego = videoJuego;
         this.cantidad = cantidad;
     }

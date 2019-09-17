@@ -6,7 +6,7 @@ import java.util.List;
 public class Inventario {
     private  Long id;
     private  List<VideoJuego> videoJuegos = new ArrayList<>();
-    private  List<Disponibilidad> disponibilidad = new ArrayList<>();
+    private  List<CatalogoVideoJuegos> catalogoVideoJuegos = new ArrayList<>();
 
     public Inventario() {
     }
@@ -15,9 +15,9 @@ public class Inventario {
         this.videoJuegos = videoJuegos;
     }
 
-    public void agregarVideoJuego(VideoJuego videoJuego, Disponibilidad disponibilidad){
+    public void agregarVideoJuego(VideoJuego videoJuego, CatalogoVideoJuegos catalogoVideoJuegos){
         this.videoJuegos.add(videoJuego);
-        this.disponibilidad.add(disponibilidad);
+        this.catalogoVideoJuegos.add(catalogoVideoJuegos);
     }
 
 
