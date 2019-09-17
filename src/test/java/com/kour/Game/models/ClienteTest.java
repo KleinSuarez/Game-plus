@@ -24,7 +24,6 @@ public class ClienteTest {
     public void obtenerNombreCliente(){
         String nombreEsperado = "nombretest";
         Assert.assertEquals(nombreEsperado, clienteTest.getNombre());
-
     }
 
 }

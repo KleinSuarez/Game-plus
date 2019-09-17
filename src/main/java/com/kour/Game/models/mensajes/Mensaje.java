@@ -7,6 +7,7 @@ public class Mensaje {
 
     public class Inventario{
         public static final String PRODUCTO_NO_DISPONIBLE = "Producto no disponible temporalmente";
+        public static final String PRODUCTO_EN_INVENTARIO = "El Producto ya se encuentra registrado en el inventario";
     }
 
 }

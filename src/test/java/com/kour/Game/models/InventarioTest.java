@@ -1,5 +1,6 @@
 package com.kour.Game.models;
 
+import com.kour.Game.models.businessException.ProductoExistenteException;
 import com.kour.Game.models.businessException.ProductoNoDisponibleException;
 import com.kour.Game.models.mensajes.Mensaje;
 import org.junit.Assert;
@@ -41,6 +42,13 @@ public class InventarioTest {
     public void obtenerCantidadPorJuego(){
         int catidadExperada = 0;
         Assert.assertEquals(catidadExperada, inventario.obtenerCantidadJuego(videoJuego), 0.5);
+    }
+
+    @Test
+    public void agregarVideoJuegoCatalogoInventario() throws ProductoExistenteException {
+        expectedException.expect(ProductoExistenteException.class);
+        expectedException.expectMessage(Mensaje.Inventario.PRODUCTO_EN_INVENTARIO);
+        inventario.agregarVideoJuegoCatalogoInventario(videoJuego);
     }
 
 }

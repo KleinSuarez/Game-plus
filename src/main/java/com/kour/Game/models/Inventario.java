@@ -1,5 +1,6 @@
 package com.kour.Game.models;
 
+import com.kour.Game.models.businessException.ProductoExistenteException;
 import com.kour.Game.models.businessException.ProductoNoDisponibleException;
 import com.kour.Game.models.mensajes.Mensaje;
 
@@ -19,8 +20,28 @@ public class Inventario {
     }
 
     public void agregarVideoJuego(VideoJuego videoJuego, CatalogoVideoJuegos catalogoVideoJuegos){
-        //this.videoJuegos.add(videoJuego);
+
         this.catalogoVideoJuegos.add(catalogoVideoJuegos);
+    }
+
+    public void agregarVideoJuegoCatalogoInventario(VideoJuego videoJuego) throws ProductoExistenteException{
+        boolean encontrado = this.buscarJuego(videoJuego);
+        if(!encontrado){
+            CatalogoVideoJuegos nuevoVideoJuego = new CatalogoVideoJuegos(videoJuego);
+        }else{
+            throw new ProductoExistenteException(Mensaje.Inventario.PRODUCTO_EN_INVENTARIO);
+        }
+
+    }
+
+    public boolean buscarJuego(VideoJuego videoJuego){
+        boolean encontrado = false;
+        for (CatalogoVideoJuegos vj:catalogoVideoJuegos) {
+            if(videoJuego.equals(vj.getVideoJuego())){
+                encontrado = true;
+            }
+        }
+        return encontrado;
     }
 
     public boolean verificarDisponibilidadJuego (VideoJuego videoJuego) throws ProductoNoDisponibleException{

@@ -10,6 +10,10 @@ public class CatalogoVideoJuegos {
 
     public CatalogoVideoJuegos(){}
 
+    public CatalogoVideoJuegos(VideoJuego videoJuego){
+        this.videoJuego = videoJuego;
+    }
+
     public CatalogoVideoJuegos(VideoJuego videoJuego, int cantidad) {
         this.videoJuego = videoJuego;
         this.cantidad = cantidad;
