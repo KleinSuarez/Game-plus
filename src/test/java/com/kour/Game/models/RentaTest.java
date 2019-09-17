@@ -20,8 +20,9 @@ import java.util.Date;
 public class RentaTest {
 
     private Renta rentatest;
-    private Date fechaRenta;
-    private Date fechaActual;
+    private String fechaActual;
+    private VideoJuego videoJuego;
+    private Inventario inventario;
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -29,17 +30,22 @@ public class RentaTest {
 
     @Before
     public void setUp() throws ParseException {
+        fechaActual = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
         rentatest = new Renta();
         rentatest.setFechaRenta("2019-08-12");
+
+        videoJuego = new VideoJuego("Juego de prueba");
+        CatalogoVideoJuegos catalogoVideoJuegos = new CatalogoVideoJuegos(videoJuego,3);
+        inventario = new Inventario();
+        inventario.agregarVideoJuego(videoJuego, catalogoVideoJuegos);
     }
 
     @Test
     public void calcularDiasUso() throws  ParseException {
-        String fechaActual = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        int diasEsperados = 0;
         String nuevaFechaRenta = String.valueOf(fechaActual);
         rentatest.setFechaRenta(nuevaFechaRenta);
-
-        int diasEsperados = 0;
         int diasSalida = rentatest.calculateDiasUso();
 
         Assert.assertEquals(diasEsperados, diasSalida,0.5);
@@ -54,14 +60,8 @@ public class RentaTest {
 
     @Test
     public void ListarClienteJuegoNoDevuelto() throws ParseException {
-        Cliente clienteExperado = new Cliente("Nombre","Apellido");
-        VideoJuego videoJuego = new VideoJuego("Juego de prueba");
-        CatalogoVideoJuegos catalogoVideoJuegos = new CatalogoVideoJuegos(videoJuego,3);
-        Inventario inventario = new Inventario();
-        inventario.agregarVideoJuego(videoJuego, catalogoVideoJuegos);
-
+        Cliente clienteExperado = new Cliente("Cliente","Test");
         rentatest = new Renta("2019-08-12", videoJuego, clienteExperado);
-
         Cliente clienteDevuelto = rentatest.listarClienteProdutoNoDevuelto();
 
         Assert.assertEquals(clienteExperado, clienteDevuelto);
