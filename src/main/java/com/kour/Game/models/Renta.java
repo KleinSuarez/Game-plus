@@ -1,6 +1,8 @@
 package com.kour.Game.models;
 
 import com.kour.Game.models.businessException.ExcedidoTiempoMaximoRentaException;
+import com.kour.Game.models.businessException.ProductoNoDisponibleException;
+import com.kour.Game.models.businessException.ProductoNoExistenteException;
 import com.kour.Game.models.mensajes.Mensaje;
 
 import java.text.ParseException;
@@ -27,15 +29,36 @@ public class Renta {
         this.fechaRenta = formatoFecha.parse(fechaRenta);
         this.videoJuegos.add(videoJuego);
         this.cliente = cliente;
-
     }
-
 
     public Renta(VideoJuego videoJuego, Cliente cliente) {
         this.videoJuegos.add(videoJuego);
         this.cliente = cliente;
     }
 
+     public void rentarVideoJuego(Inventario inventario, VideoJuego... videoJuegos) throws ProductoNoExistenteException {
+        for (VideoJuego vj:videoJuegos) {
+            for (CatalogoVideoJuegos cvj: inventario.getCatalogoVideoJuegos()) {
+                if(vj.equals(cvj.getVideoJuego())){
+                    cvj.disminuirCantidad();
+                }else {
+                    throw new ProductoNoExistenteException(Mensaje.Inventario.PRODUCTO_NO_EXISTENTE);
+                }
+            }
+        }
+    }
+
+    public void devolverVideoJuego(Inventario inventario, VideoJuego... videoJuegos) throws ProductoNoExistenteException {
+        for (VideoJuego vj:videoJuegos) {
+            for (CatalogoVideoJuegos cvj: inventario.getCatalogoVideoJuegos()) {
+                if(vj.equals(cvj.getVideoJuego())){
+                    cvj.aumentarCantidad();
+                }else {
+                    throw new ProductoNoExistenteException(Mensaje.Inventario.PRODUCTO_NO_EXISTENTE);
+                }
+            }
+        }
+    }
 
     public int calculateDiasUso(){
         java.util.Date fechaActual = new Date();
@@ -55,8 +78,6 @@ public class Renta {
         }
         return null;
     }
-
-    // Getter and Setter
 
     public void setFechaRenta(String fechaRenta) throws ParseException {
         this.fechaRenta = formatoFecha.parse(fechaRenta);

@@ -9,11 +9,9 @@ import java.util.List;
 
 public class Inventario {
     private  Long id;
-    //private  List<VideoJuego> videoJuegos = new ArrayList<>();
     private  List<CatalogoVideoJuegos> catalogoVideoJuegos = new ArrayList<>();
 
-    public Inventario() {
-    }
+    public Inventario() {}
 
     public Inventario(CatalogoVideoJuegos catalogoVideoJuegos) {
         this.catalogoVideoJuegos.add(catalogoVideoJuegos);
@@ -28,6 +26,16 @@ public class Inventario {
         boolean encontrado = this.buscarJuego(videoJuego);
         if(!encontrado){
             CatalogoVideoJuegos nuevoVideoJuego = new CatalogoVideoJuegos(videoJuego);
+        }else{
+            throw new ProductoExistenteException(Mensaje.Inventario.PRODUCTO_EN_INVENTARIO);
+        }
+
+    }
+
+    public void agregarVideoJuegoCatalogoInventario(CatalogoVideoJuegos catalogoVideoJuego) throws ProductoExistenteException{
+        boolean encontrado = this.buscarJuego(catalogoVideoJuego.getVideoJuego());
+        if(!encontrado){
+            this.catalogoVideoJuegos.add(catalogoVideoJuego);
         }else{
             throw new ProductoExistenteException(Mensaje.Inventario.PRODUCTO_EN_INVENTARIO);
         }
@@ -54,7 +62,6 @@ public class Inventario {
                 disponile = true;
             }
         }
-
         return disponile;
     }
 
@@ -68,4 +75,7 @@ public class Inventario {
         return catidadVideoJuego;
     }
 
+    public List<CatalogoVideoJuegos> getCatalogoVideoJuegos() {
+        return catalogoVideoJuegos;
+    }
 }

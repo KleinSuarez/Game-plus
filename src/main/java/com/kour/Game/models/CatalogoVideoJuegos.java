@@ -19,6 +19,14 @@ public class CatalogoVideoJuegos {
         this.cantidad = cantidad;
     }
 
+    public void disminuirCantidad(){
+        this.cantidad --;
+    }
+
+    public void aumentarCantidad(){
+        this.cantidad ++;
+    }
+
     public boolean isDisponible() {
         if(this.cantidad > 0){
             return  true;
