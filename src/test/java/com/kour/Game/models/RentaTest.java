@@ -1,6 +1,9 @@
 package com.kour.Game.models;
 
 import com.kour.Game.models.businessException.ExcedidoTiempoMaximoRentaException;
+import com.kour.Game.models.businessException.ProductoExistenteException;
+import com.kour.Game.models.businessException.ProductoNoDisponibleException;
+import com.kour.Game.models.businessException.ProductoNoExistenteException;
 import com.kour.Game.models.mensajes.Mensaje;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,6 +26,7 @@ public class RentaTest {
     private String fechaActual;
     private VideoJuego videoJuego;
     private Inventario inventario;
+    private CatalogoVideoJuegos catalogoVideoJuegos;
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -36,7 +40,7 @@ public class RentaTest {
         rentatest.setFechaRenta("2019-08-12");
 
         videoJuego = new VideoJuego("Juego de prueba");
-        CatalogoVideoJuegos catalogoVideoJuegos = new CatalogoVideoJuegos(videoJuego,3);
+        catalogoVideoJuegos = new CatalogoVideoJuegos(videoJuego,3);
         inventario = new Inventario();
         inventario.agregarVideoJuego(videoJuego, catalogoVideoJuegos);
     }
@@ -65,6 +69,34 @@ public class RentaTest {
         Cliente clienteDevuelto = rentatest.listarClienteProdutoNoDevuelto();
 
         Assert.assertEquals(clienteExperado, clienteDevuelto);
+    }
+
+    @Test
+    public void rentarJuegoNoExistente() throws ProductoNoExistenteException{
+        VideoJuego nuevoVideoJuego = new VideoJuego("Nuevo Juego");
+        exception.expect(ProductoNoExistenteException.class);
+        exception.expectMessage(Mensaje.Inventario.PRODUCTO_NO_EXISTENTE);
+        rentatest.rentarVideoJuego(inventario, nuevoVideoJuego);
+    }
+
+    @Test
+    public void devolverJuegoNoExixtente() throws  ProductoNoExistenteException{
+        VideoJuego nuevoJuego = new VideoJuego("Nuevo Juego");
+        exception.expect(ProductoNoExistenteException.class);
+        exception.expectMessage(Mensaje.Inventario.PRODUCTO_NO_EXISTENTE);
+
+        rentatest.devolverVideoJuego(inventario, nuevoJuego);
+    }
+
+    @Test
+    public void ProductoNoDisponible() throws ProductoNoDisponibleException, ProductoExistenteException {
+        VideoJuego nuevoVideoJuego = new VideoJuego("Nuevo Juego2");
+        CatalogoVideoJuegos nCatalogoVideoJuegos = new CatalogoVideoJuegos(nuevoVideoJuego, 0);
+        inventario.agregarVideoJuegoCatalogoInventario(nCatalogoVideoJuegos);
+
+        exception.expect(ProductoNoDisponibleException.class);
+        exception.expectMessage(Mensaje.Inventario.PRODUCTO_NO_DISPONIBLE);
+        inventario.verificarDisponibilidadJuego(nuevoVideoJuego);
     }
     
 }
