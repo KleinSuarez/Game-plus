@@ -16,7 +16,7 @@ public class VideoJuegoTest {
     @Before
     public void setUp(){
         videoJuego = new VideoJuego("JuegoDePrueba");
-        videoJuego.setAniolanzamiento("2019");
+        videoJuego.setAniolanzamiento("2018");
         videoJuego.agregarCategoria("Lista", "Categoria");
     }
 
